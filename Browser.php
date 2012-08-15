@@ -1,10 +1,11 @@
 <?php
 	/**
-	 * File: Browser.php
-	 * Author: Chris Schuld (http://chrisschuld.com/)
-	 * Last Modified: August 20th, 2010
-	 * @version 1.9
-	 * @package PegasusPHP
+	 * File:				Browser.php
+	 * Original Author:		Chris Schuld (http://chrisschuld.com/)
+	 * Modified By:			Gabriel Nahmias (http://terrasoftlabs.com/)
+	 * Last Modified:		August 15th, 2012
+	 * @version				2.0
+	 * @package				GeoTrace
 	 *
 	 * Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld.com)
 	 *
@@ -33,6 +34,9 @@
 	 * http://apptools.com/phptools/browser/
 	 *
 	 * UPDATES:
+	 *
+	 * 2012-08-15 (v2.0):
+	 *  + Added getStylesheet() function to facilitate browser-specific CSS.
 	 *
 	 * 2010-08-20 (v1.9):
 	 *  + Added MSN Explorer Browser (legacy)
@@ -241,6 +245,250 @@
 		* @return string Name of the browser
 		*/
 		public function getBrowser() { return $this->_browser_name; }
+		
+		/**
+		* The most logical filename for a stylesheet suited for the given browser.
+		* @author Gabriel Nahmias
+		* @return string Filename for the browser-specific CSS file.
+		*/
+		public function getStylesheet() {
+			
+			$sBrowser = $this->getBrowser();
+			$sFilePrefix = "";					// strtolower() here?
+			
+			switch ($sBrowser) {
+				
+				// Some of the cases are commented out because the default case takes care
+				// of what I would most likely make their file prefix (lowercase form of browser's
+				// name).
+				
+				case Browser::BROWSER_UNKNOWN:
+					
+					$sFilePrefix = "unknown";
+					
+					break;
+				/*
+				case Browser::BROWSER_OPERA:
+					
+					$sFilePrefix = 'opera';
+					
+					break;
+				*/
+				case Browser::BROWSER_OPERA_MINI:
+					
+					$sFilePrefix = 'operam';
+					
+					break;
+				/*
+				case Browser::BROWSER_WEBTV:
+					
+					$sFilePrefix = 'WebTV';
+					
+					break;
+				*/
+				case Browser::BROWSER_IE:
+					
+					// Need more here for versions, etc. (because IE sucks -_-).
+					
+					$sFilePrefix = 'ie';
+					
+					break;
+
+				case Browser::BROWSER_POCKET_IE:
+					
+					$sFilePrefix = 'pie';
+					
+					break;
+				/*
+				case Browser::BROWSER_KONQUEROR:
+					
+					$sFilePrefix = 'Konqueror';
+					
+					break;
+				case Browser::BROWSER_ICAB:
+					
+					$sFilePrefix = 'iCab';
+					
+					break;
+				case Browser::BROWSER_OMNIWEB:
+					
+					$sFilePrefix = 'OmniWeb';
+					
+					break;
+
+				case Browser::BROWSER_FIREBIRD:
+					
+					$sFilePrefix = 'Firebird';
+					
+					break;
+
+				case Browser::BROWSER_FIREFOX:
+					
+					$sFilePrefix = 'Firefox';
+					
+					break;
+
+				case Browser::BROWSER_ICEWEASEL:
+					
+					$sFilePrefix = 'Iceweasel';
+					
+					break;
+
+				case Browser::BROWSER_SHIRETOKO:
+					
+					$sFilePrefix = 'Shiretoko';
+					
+					break;
+
+				case Browser::BROWSER_MOZILLA:
+					
+					$sFilePrefix = 'Mozilla';
+					
+					break;
+
+				case Browser::BROWSER_AMAYA:
+					
+					$sFilePrefix = 'Amaya';
+					
+					break;
+
+				case Browser::BROWSER_LYNX:
+					
+					$sFilePrefix = 'Lynx';
+					
+					break;
+
+				case Browser::BROWSER_SAFARI:
+					
+					$sFilePrefix = 'Safari';
+					
+					break;
+
+				case Browser::BROWSER_IPHONE:
+					
+					$sFilePrefix = 'iPhone';
+					
+					break;
+
+				case Browser::BROWSER_IPOD:
+					
+					$sFilePrefix = 'iPod';
+					
+					break;
+
+				case Browser::BROWSER_IPAD:
+					
+					$sFilePrefix = 'iPad';
+					
+					break;
+
+				case Browser::BROWSER_CHROME:
+					
+					$sFilePrefix = 'Chrome';
+					
+					break;
+
+				case Browser::BROWSER_ANDROID:
+					
+					$sFilePrefix = 'Android';
+					
+					break;
+
+				case Browser::BROWSER_GOOGLEBOT:
+					
+					$sFilePrefix = 'GoogleBot';
+					
+					break;
+				*/
+				
+				case Browser::BROWSER_SLURP:
+					
+					$sFilePrefix = 'yslurp';
+					
+					break;
+
+				case Browser::BROWSER_W3CVALIDATOR:
+					
+					$sFilePrefix = 'w3cv';
+					
+					break;
+				
+				/*
+				case Browser::BROWSER_BLACKBERRY:
+					
+					$sFilePrefix = 'BlackBerry';
+					
+					break;
+
+				case Browser::BROWSER_ICECAT:
+					
+					$sFilePrefix = 'IceCat';
+					
+					break;
+				*/
+				
+				case Browser::BROWSER_NOKIA_S60:
+					
+					$sFilePrefix = 'nokias60';
+					
+					break;
+
+				case Browser::BROWSER_NOKIA:
+					
+					$sFilePrefix = 'nokia';
+					
+					break;
+
+				case Browser::BROWSER_MSN:
+					
+					$sFilePrefix = 'msn';
+					
+					break;
+
+				case Browser::BROWSER_MSNBOT:
+					
+					$sFilePrefix = 'msnbot';
+					
+					break;
+				
+				case Browser::BROWSER_NETSCAPE_NAVIGATOR:
+					
+					$sFilePrefix = 'netscape';
+					
+					break;
+				/*
+				case Browser::BROWSER_GALEON:
+					
+					$sFilePrefix = 'Galeon';
+					
+					break;
+					
+				case Browser::BROWSER_NETPOSITIVE:
+					
+					$sFilePrefix = 'NetPositive';
+					
+					break;
+
+				case Browser::BROWSER_PHOENIX:
+					
+					$sFilePrefix = 'Phoenix';
+					
+					break;
+				*/
+				
+				default:
+					
+					// Default file prefix is the lowercase form of the browser's name.
+					
+					$sFilePrefix = strtolower($sBrowser);
+					
+					break;
+				
+			}
+			
+			return "$sFilePrefix.css";
+			
+		}
 		/**
 		* Set the name of the browser
 		* @param $browser The name of the Browser
