@@ -1,4 +1,4 @@
-_This is not my code, but rather a GitHub repo of (a possibly modified version) Chris Schuld's code so people can use it as a submodule in their Git projects. To download the original code please visit [Chris Schuld's page](http://chrisschuld.com/projects/browser-php-detecting-a-users-browser-from-php/)._
+_This is not my code, but rather a GitHub repo of (a modified version) Chris Schuld's code so people can use it as a submodule in their Git projects. To download the original code please visit [Chris Schuld's page](http://chrisschuld.com/projects/browser-php-detecting-a-users-browser-from-php/)._
 
 ## Browser.php - Detecting a user's browser from PHP
 
